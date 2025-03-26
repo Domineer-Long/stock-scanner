@@ -6,7 +6,7 @@ from services.stock_data_provider import StockDataProvider
 from services.technical_indicator import TechnicalIndicator
 from services.stock_scorer import StockScorer
 from services.ai_analyzer import AIAnalyzer
-
+import akshare as ak
 # 获取日志器
 logger = get_logger()
 
@@ -138,7 +138,6 @@ class StockAnalyzerService:
                 
             # 当前分析日期
             analysis_date = datetime.now().strftime('%Y-%m-%d')
-            
             # 生成基本分析结果
             basic_result = {
                 "stock_code": stock_code,

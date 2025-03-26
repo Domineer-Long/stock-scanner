@@ -467,7 +467,7 @@ function handleStreamInit(data: StreamInitMessage) {
     // 单个股票分析
     analyzedStocks.value = [{
       code: data.stock_code,
-      name: '',
+      name: data.stock_simple_name,
       marketType: marketType.value,
       analysisStatus: 'waiting'
     }];
@@ -675,6 +675,7 @@ async function analyzeStocks() {
       for (const line of lines) {
         if (line.trim()) {
           try {
+            console.log('处理数据:', line);
             processStreamData(line);
           } catch (e: Error | unknown) {
             console.error('处理数据流时出错:', e);

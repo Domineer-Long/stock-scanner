@@ -87,10 +87,12 @@ export interface StreamInitMessage {
   stream_type: 'single' | 'batch';
   stock_code?: string;
   stock_codes?: string[];
+  stock_simple_name?: string;
 }
 
 export interface StreamAnalysisUpdate {
   stock_code: string;
+  stock_simple_name?: string;
   analysis?: string;
   status: 'analyzing' | 'completed' | 'error';
   error?: string;

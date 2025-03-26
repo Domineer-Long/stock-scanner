@@ -18,6 +18,7 @@ import json
 import secrets
 from datetime import datetime, timedelta
 from jose import JWTError, jwt
+import akshare as ak
 
 load_dotenv()
 
@@ -213,9 +214,10 @@ async def analyze(request: AnalyzeRequest, username: str = Depends(verify_token)
                 # 单个股票分析流式处理
                 stock_code = stock_codes[0].strip()
                 logger.info(f"开始单股流式分析: {stock_code}")
-                
+                stock_individual_info_em_df = ak.stock_individual_info_em(symbol=stock_code)
+                stock_simple_name = stock_individual_info_em_df.to_dict(orient='records')[1]['value']
                 stock_code_json = json.dumps(stock_code)
-                init_message = f'{{"stream_type": "single", "stock_code": {stock_code_json}}}\n'
+                init_message = f'{{"stream_type": "single", "stock_code": {stock_code_json}, "stock_simple_name": "{stock_simple_name}"}}\n'
                 yield init_message
                 
                 logger.debug(f"开始处理股票 {stock_code} 的流式响应")
