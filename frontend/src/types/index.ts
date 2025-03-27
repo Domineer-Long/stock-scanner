@@ -21,7 +21,7 @@ export interface LoginResponse {
 
 export interface StockInfo {
   code: string;
-  name: string;
+  name?: string;
   marketType: string;
   price?: number;
   changePercent?: number;
@@ -87,7 +87,7 @@ export interface StreamInitMessage {
   stream_type: 'single' | 'batch';
   stock_code?: string;
   stock_codes?: string[];
-  stock_simple_name?: string;
+  stock_simple_name?: string | undefined;
 }
 
 export interface StreamAnalysisUpdate {
